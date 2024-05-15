@@ -48,6 +48,8 @@ function generarNavbar() {
                                     </ul>
                                 </li>
                                 </ul>
+                                <!-- Formulario de inicio de sesion -->
+                                <!--BOTON MODAL  -->
                                 <div class="boton-modal">
                                     <label for="btn-modal">
                                        Ingresar
@@ -62,36 +64,67 @@ function generarNavbar() {
                                           <div class="content-modal">
                                                       <div class="formulario">
                                                           
-                                                          <!-- Agregamos titulo -->
-                                                          <h1>Inicio de sesion</h1>
+                                                          
                                                          
                                                           <!-- Form con metodo post para enviar información -->
-                                                          <form method="post">
-                                                              <div class="username">
-                                                                  <input type="text" required>
-                                                                  <label>Nombre de usuario</label>
+                                                        <form method="post" class="formulario" id="formulario">
+                                                            <!-- Agregamos titulo -->
+                                                                <h1>Inicio de sesion</h1>
+                                                            
+                                                            <!-- INICIO SESION: USUARIO -->
+                                                                
+                                                                <div class="formulario__usu-con " id="gp_username">
+                                                                    <label for="usuario" class="formulario__label">Nombre de usuario</label>
+                                                                    <div class="formulario_gp-input">
+                                                                        <input type="text" class="formulario_input" name="usuario" id="usuario" placeholder="Usuario">   
+                                                                        <i class="formulario__validacion-estado bi bi-x-octagon"></i>
+                                                                        
+                                                                    </div>
+                                                                    <p class="formulario__input-error">Debe ser de 4 a 16 digitos y solamente letras, puntos y guion bajo.</p>
+                                                                </div>
+                                                            
+                                                            <!-- INICIO SESION: CONTRASEÑA -->
+                                                                <div class="formulario__usu-con " id="gp_contrasena">
+                                                                    <label for="contrasena" class="formulario__label">Contraseña</label>
+                                                                    <div class="formulario_gp-input">
+                                                                        <input type="password" class="formulario_input" name="contrasena" id="contrasena" >
+                                                                        <i class="formulario__validacion-estado bi bi-x-octagon"></i>
+                                                                    </div>
+                                                                    <p class="formulario__input-error">Debe ser de 4 a 12 digitos.</p>
+                                                                </div>
+                                                              
+                                                                <div class="formulario__mensaje" id="formulario__mensaje">
+                                                                
+                                                                    <p><i class="bi bi-exclamation-triangle-fill"></i><b>Algo salio mal:</b>Por favor vuelva a intentarlo.</p>
+                                                                
+                                                                </div>
+                                                              
+                                                                <div class="recordar" style="padding-left: 25px; padding-top: 15px;">
+                                                                    ¿Olvido su contraseña?
+                                                                </div>
+                                                              
+                                                              <div class="formulario__iniciar formulario__btn-iniciar" style="padding: 10px;">
+                                                                <button type="submit" class="formulario__btn">Iniciar</button>
+                                                                <!-- <input type="submit" value="Iniciar"> -->
+                                                                
+                                                              </div>
+                                                              
                               
+                                                              <div class="registrarse" style="padding-left: 30%; padding-top: 15px;">
+                                                                  <a href="">Registrarse</a>
                                                               </div>
-                                                              <div class="contrasena">
-                                                                  <input type="text" required>
-                                                                  <label>Contraseña</label>
-                                                              </div>
-                                                              <div class="recordar">¿Olvido su contraseña?</div>
-                                                              <input type="submit" value="Iniciar">
-                              
-                                                              <div class="registrarse">
-                                                                  <a href="a">Registrarse</a>
-                                                              </div>
-                                                          </form>
+                                                        </form>
                                                       
                                                               <div class="btn-cerrar">
-                                                                  <label for="btn-modal">cerrar</label>
+                                                                  <label for="btn-modal"><i class="bi bi-x"></i></label>
                                           
                                                               </div>
                                                       </div>
                                                       <label for="btn-modal" class="cerrar-modal"></label>       
                                           </div>                
-                                      </div>               
+                                      </div> 
+                                <!-- Fin formulario inicio sesion -->
+                                <script src="formulario.js"></script>               
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Buscar</button>
