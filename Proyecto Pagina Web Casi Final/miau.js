@@ -194,3 +194,48 @@ function subir() {
     });
 }
 
+const formulario = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario input'); // esta constante almacenara todos los inputs del formulario
+
+//Nos permite que el ususario ingrese ciertos caracteres que deseamos.
+const expresiones = {
+	usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+	contrasena: /^.{4,12}$/, // 4 a 12 digitos.
+}
+ 
+const validarFormulario = (e) => {
+    switch (e.target.name) {
+        case "usuario":
+            validarCampo(expresiones.usuario, e.target, 'usuario');
+        break;
+        
+        case "contrasena":
+            validarCampo(expresiones.contrasena, e.target, 'contrasena');
+        break;
+    }
+}
+
+const validarCampo = (expresion, input, campo) => {
+    if(expresion.test(input.value)){
+        document.getElementById(`gp_${campo}`).classList.remove('formulario__usu-con-incorrecto');
+        document.getElementById(`gp_${campo}`).classList.add('formulario__usu-con-correcto');
+        document.querySelector(`#gp_${campo} i`).classList.remove('bi bi-check-circle-fill');
+        document.querySelector(`#gp_${campo} i`).classList.add('bi bi-x-octagon');
+        document.querySelector(`#gp_${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
+    } else {
+        document.getElementById(`gp_${campo}`).classList.add('formulario__usu-con-incorrecto');
+        document.getElementById(`gp_${campo}`).classList.remove('formulario__usu-con-correcto');
+        document.querySelector(`#gp_${campo} i`).classList.add('bi bi-x-octagon');
+        document.querySelector(`#gp_${campo} i`).classList.remove('bi bi-check-circle-fill');
+        document.querySelector(`#gp_${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');            
+    }
+}
+
+inputs.forEach((input) => {
+    input.addEventListener('keyup', validarFormulario);
+    input.addEventListener('blur' , validarFormulario);
+});
+
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+})
