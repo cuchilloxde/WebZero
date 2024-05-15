@@ -125,12 +125,25 @@ document.addEventListener("DOMContentLoaded", function(){
 const listaComentarios = async() => {
     const respuesta = await fetch('https://jsonplaceholder.typicode.com/comments');
     const comentarios = await respuesta.json();
-    document.getElementById("Nombre1").innerText= comentarios[1][2];
+    let datosJson = [];
+   // comentarios.forEach((comentario) => {
+       // datosJson.push(comentario);
+   // });
+    Object.entries(comentarios).forEach(([postid, comentario]) => {
+        let { name, body } = comentario;
+        datosJson.push({
+            nombre: name,
+            mensaje: body
+        });
+    });
     
-    document.getElementById("Comentario1").innerText= comentarios[1][4];
-    document.getElementById("Nombre2").innerText= comentarios[2][2];
+
+    document.getElementById("Nombre1").innerHTML= datosJson[1].nombre;
     
-    document.getElementById("Comentario2").innerText= comentarios[2][4];
+    document.getElementById("Comentario1").innerText= datosJson[1].mensaje;
+    document.getElementById("Nombre2").innerText= datosJson[2].nombre;
+    
+    document.getElementById("Comentario2").innerText= datosJson[2].mensaje;
 };
 
 window.addEventListener("DOMContentLoaded",function(){
