@@ -201,7 +201,7 @@ const inputs = document.querySelectorAll('#formulario input'); // esta constante
 const expresiones = {
 	usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
 	contrasena: /^.{4,12}$/, // 4 a 12 digitos.
-}
+    }
  
 const campos ={
     usuario: false, //estos valores representan si un campo esta valido o no
@@ -251,3 +251,39 @@ formulario.addEventListener('submit', (e) => {
     
     }
 })
+
+
+//FORMULARIO CONTACTO
+const formulario = document.getElementById('formulario_contacto');
+const inputs = document.querySelectorAll('#form-control input');
+
+const expresiones = {
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+    correo: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+
+}
+
+const campos ={
+    nombre: false,
+    apellido: false,
+    correo: false
+}
+
+const validarFormulario = (e) => {
+    switch (e.target.name) {
+        case "Nombre":
+            validarCampo(expresiones.usuario, e.target, 'Nombre');
+        break;
+        
+        case "Apellido":
+            validarCampo(expresiones.contrasena, e.target, 'Apellido');
+        break;
+
+        case "Email":
+            validarCampo(expresiones.contrasena, e.target, 'Email');
+        break;
+    }
+}
+
+    
