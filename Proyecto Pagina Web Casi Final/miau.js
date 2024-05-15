@@ -122,3 +122,20 @@ document.addEventListener("DOMContentLoaded", function(){
     generarNavbar();
 });
 
+const listaUsuarios = async() => {
+    const respuesta = await fetch('https://jsonplaceholder.typicode.com/comments');
+    const comentarios = await respuesta.json();
+    let cajaComentario = ``;
+    comentarios.forEach((comentario,index)=>{
+        cajaComentario += `
+        <div>${comentario.name}</div>
+        <div>${comentario.body}</div>
+        
+        `;
+    });
+    document.getElementById("cajaComentario").innerHTML= cajaComentario;
+};
+
+window.addEventListener("load",function(){
+    listaUsuarios();
+});
