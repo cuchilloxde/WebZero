@@ -48,6 +48,7 @@ function generarNavbar() {
                                     </ul>
                                 </li>
                                 </ul>
+                                
                                 <!-- Formulario de inicio de sesion -->
                                 <!--BOTON MODAL  -->
                                 <div class="boton-modal">
@@ -62,7 +63,7 @@ function generarNavbar() {
                                       <div class="container-modal">
                                           
                                           <div class="content-modal">
-                                                      <div class="formulario">
+                                                      <div class="formulario_ini">
                                                           
                                                           
                                                          
@@ -119,12 +120,15 @@ function generarNavbar() {
                                                                   <label for="btn-modal"><i class="bi bi-x"></i></label>
                                           
                                                               </div>
+                                                      
+                                                        <label for="btn-modal" class="cerrar-modal"></label>      
                                                       </div>
-                                                      <label for="btn-modal" class="cerrar-modal"></label>       
+                                                       
                                           </div>                
                                       </div> 
                                 <!-- Fin formulario inicio sesion -->
-                                <script src="formulario.js"></script>               
+                                <script src="formulario.js"></script>             
+                            
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Buscar</button>
