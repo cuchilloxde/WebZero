@@ -117,25 +117,30 @@ function generarNavbar() {
     document.getElementById("miNavbar").innerHTML = navbar;
 }
 
-// Para utilizar la función y obtener el código HTML del navbar
+
 document.addEventListener("DOMContentLoaded", function(){
     generarNavbar();
 });
 
-const listaUsuarios = async() => {
+const listaComentarios = async() => {
     const respuesta = await fetch('https://jsonplaceholder.typicode.com/comments');
     const comentarios = await respuesta.json();
-    let cajaComentario = ``;
-    comentarios.forEach((comentario,index)=>{
-        cajaComentario += `
-        <div>${comentario.name}</div>
-        <div>${comentario.body}</div>
-        
-        `;
-    });
-    document.getElementById("cajaComentario").innerHTML= cajaComentario;
+    document.getElementById("Nombre1").innerText= comentarios[1][2];
+    
+    document.getElementById("Comentario1").innerText= comentarios[1][4];
+    document.getElementById("Nombre2").innerText= comentarios[2][2];
+    
+    document.getElementById("Comentario2").innerText= comentarios[2][4];
 };
 
-window.addEventListener("load",function(){
-    listaUsuarios();
+window.addEventListener("DOMContentLoaded",function(){
+    listaComentarios();
 });
+
+function subir() {
+    window.scrollTo({
+        top: 0,
+        behavior: "smooth" 
+    });
+}
+
