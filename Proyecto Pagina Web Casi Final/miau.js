@@ -203,6 +203,11 @@ const expresiones = {
 	contrasena: /^.{4,12}$/, // 4 a 12 digitos.
 }
  
+const campos ={
+    usuario: false, //estos valores representan si un campo esta valido o no
+    contrasena: false
+}
+
 const validarFormulario = (e) => {
     switch (e.target.name) {
         case "usuario":
@@ -222,12 +227,14 @@ const validarCampo = (expresion, input, campo) => {
         document.querySelector(`#gp_${campo} i`).classList.remove('bi bi-check-circle-fill');
         document.querySelector(`#gp_${campo} i`).classList.add('bi bi-x-octagon');
         document.querySelector(`#gp_${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
+        campos[campo] = true;
     } else {
         document.getElementById(`gp_${campo}`).classList.add('formulario__usu-con-incorrecto');
         document.getElementById(`gp_${campo}`).classList.remove('formulario__usu-con-correcto');
         document.querySelector(`#gp_${campo} i`).classList.add('bi bi-x-octagon');
         document.querySelector(`#gp_${campo} i`).classList.remove('bi bi-check-circle-fill');
         document.querySelector(`#gp_${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');            
+        campos[campo] = false;
     }
 }
 
@@ -238,4 +245,9 @@ inputs.forEach((input) => {
 
 formulario.addEventListener('submit', (e) => {
 	e.preventDefault();
+
+    if(campos.usuario && campos.contrasena){
+        formulario.reset();
+    
+    }
 })
