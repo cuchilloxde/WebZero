@@ -349,6 +349,6 @@ input[type= "submit"]:hover{
 }
 
 .form-control.error small {
-	visibility: visible;
+	visibility: hidden;
     display: none;
 }
