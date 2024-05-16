@@ -48,6 +48,9 @@ function generarNavbar() {
                                     </ul>
                                 </li>
                                 </ul>
+                                
+                                <!-- Formulario de inicio de sesion -->
+                                <!--BOTON MODAL  -->
                                 <div class="boton-modal">
                                     <label for="btn-modal">
                                        Ingresar
@@ -60,38 +63,72 @@ function generarNavbar() {
                                       <div class="container-modal">
                                           
                                           <div class="content-modal">
-                                                      <div class="formulario">
+                                                      <div class="formulario_ini">
                                                           
-                                                          <!-- Agregamos titulo -->
-                                                          <h1>Inicio de sesion</h1>
+                                                          
                                                          
                                                           <!-- Form con metodo post para enviar información -->
-                                                          <form method="post">
-                                                              <div class="username">
-                                                                  <input type="text" required>
-                                                                  <label>Nombre de usuario</label>
+                                                        <form method="post" class="formulario" id="formulario">
+                                                            <!-- Agregamos titulo -->
+                                                                <h1>Inicio de sesion</h1>
+                                                            
+                                                            <!-- INICIO SESION: USUARIO -->
+                                                                
+                                                                <div class="formulario__usu-con " id="gp_username">
+                                                                    <label for="usuario" class="formulario__label">Nombre de usuario</label>
+                                                                    <div class="formulario_gp-input">
+                                                                        <input type="text" class="formulario_input" name="usuario" id="usuario" placeholder="Usuario">   
+                                                                        <i class="formulario__validacion-estado bi bi-x-octagon"></i>
+                                                                        
+                                                                    </div>
+                                                                    <p class="formulario__input-error">Debe ser de 4 a 16 digitos y solamente letras, puntos y guion bajo.</p>
+                                                                </div>
+                                                            
+                                                            <!-- INICIO SESION: CONTRASEÑA -->
+                                                                <div class="formulario__usu-con " id="gp_contrasena">
+                                                                    <label for="contrasena" class="formulario__label">Contraseña</label>
+                                                                    <div class="formulario_gp-input">
+                                                                        <input type="password" class="formulario_input" name="contrasena" id="contrasena" >
+                                                                        <i class="formulario__validacion-estado bi bi-x-octagon"></i>
+                                                                    </div>
+                                                                    <p class="formulario__input-error">Debe ser de 4 a 12 digitos.</p>
+                                                                </div>
+                                                              
+                                                                <div class="formulario__mensaje" id="formulario__mensaje">
+                                                                
+                                                                    <p><i class="bi bi-exclamation-triangle-fill"></i><b>Algo salio mal:</b>Por favor vuelva a intentarlo.</p>
+                                                                
+                                                                </div>
+                                                              
+                                                                <div class="recordar" style="padding-left: 25px; padding-top: 15px;">
+                                                                    ¿Olvido su contraseña?
+                                                                </div>
+                                                              
+                                                              <div class="formulario__iniciar formulario__btn-iniciar" style="padding: 10px;">
+                                                                <button type="submit" class="formulario__btn">Iniciar</button>
+                                                                <!-- <input type="submit" value="Iniciar"> -->
+                                                                
+                                                              </div>
+                                                              
                               
+                                                              <div class="registrarse" style="padding-left: 30%; padding-top: 15px;">
+                                                                  <a href="">Registrarse</a>
                                                               </div>
-                                                              <div class="contrasena">
-                                                                  <input type="text" required>
-                                                                  <label>Contraseña</label>
-                                                              </div>
-                                                              <div class="recordar">¿Olvido su contraseña?</div>
-                                                              <input type="submit" value="Iniciar">
-                              
-                                                              <div class="registrarse">
-                                                                  <a href="a">Registrarse</a>
-                                                              </div>
-                                                          </form>
+                                                        </form>
                                                       
                                                               <div class="btn-cerrar">
-                                                                  <label for="btn-modal">cerrar</label>
+                                                                  <label for="btn-modal"><i class="bi bi-x"></i></label>
                                           
                                                               </div>
+                                                      
+                                                        <label for="btn-modal" class="cerrar-modal"></label>      
                                                       </div>
-                                                      <label for="btn-modal" class="cerrar-modal"></label>       
+                                                       
                                           </div>                
-                                      </div>               
+                                      </div> 
+                                <!-- Fin formulario inicio sesion -->
+                                <script src="formulario.js"></script>             
+                            
                             <form class="d-flex" role="search">
                                 <input class="form-control me-2" type="search" placeholder="Buscar" aria-label="Search">
                                 <button class="btn btn-outline-success" type="submit">Buscar</button>
@@ -157,3 +194,148 @@ function subir() {
     });
 }
 
+const formulario = document.getElementById('formulario');
+const inputs = document.querySelectorAll('#formulario input'); // esta constante almacenara todos los inputs del formulario
+
+//Nos permite que el ususario ingrese ciertos caracteres que deseamos.
+const expresiones = {
+	usuario: /^[a-zA-Z0-9\_\-]{4,16}$/, // Letras, numeros, guion y guion_bajo
+	contrasena: /^.{4,12}$/, // 4 a 12 digitos.
+    }
+ 
+const campos ={
+    usuario: false, //estos valores representan si un campo esta valido o no
+    contrasena: false
+}
+
+const validarFormulario = (e) => {
+    switch (e.target.name) {
+        case "usuario":
+            validarCampo(expresiones.usuario, e.target, 'usuario');
+        break;
+        
+        case "contrasena":
+            validarCampo(expresiones.contrasena, e.target, 'contrasena');
+        break;
+    }
+}
+
+const validarCampo = (expresion, input, campo) => {
+    if(expresion.test(input.value)){
+        document.getElementById(`gp_${campo}`).classList.remove('formulario__usu-con-incorrecto');
+        document.getElementById(`gp_${campo}`).classList.add('formulario__usu-con-correcto');
+        document.querySelector(`#gp_${campo} i`).classList.remove('bi bi-check-circle-fill');
+        document.querySelector(`#gp_${campo} i`).classList.add('bi bi-x-octagon');
+        document.querySelector(`#gp_${campo} .formulario__input-error`).classList.remove('formulario__input-error-activo');
+        campos[campo] = true;
+    } else {
+        document.getElementById(`gp_${campo}`).classList.add('formulario__usu-con-incorrecto');
+        document.getElementById(`gp_${campo}`).classList.remove('formulario__usu-con-correcto');
+        document.querySelector(`#gp_${campo} i`).classList.add('bi bi-x-octagon');
+        document.querySelector(`#gp_${campo} i`).classList.remove('bi bi-check-circle-fill');
+        document.querySelector(`#gp_${campo} .formulario__input-error`).classList.add('formulario__input-error-activo');            
+        campos[campo] = false;
+    }
+}
+
+inputs.forEach((input) => {
+    input.addEventListener('keyup', validarFormulario);
+    input.addEventListener('blur' , validarFormulario);
+});
+
+formulario.addEventListener('submit', (e) => {
+	e.preventDefault();
+
+    if(campos.usuario && campos.contrasena){
+        formulario.reset();
+    
+    }
+})
+
+
+//FORMULARIO CONTACTO
+const form = document.getElementById('needs-validation');
+const nombre = document.getElementById('Nombre');
+const apellido = document.getElementById('Apellido');
+const email = document.getElementById('Email');
+
+const expresiones = {
+    nombre: /^[a-zA-ZÀ-ÿ\s]{1,40}$/, // Letras y espacios, pueden llevar acentos.
+    apellido: /^[a-zA-ZÀ-ÿ\s]{1,40}$/,
+    email: /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/
+
+}
+
+form.addEventListener('submit', e => {
+	e.preventDefault();
+	
+	checkInputs();
+});
+
+function checkInputs() {
+	
+	const nombreValue = nombre.value.trim();
+	const apellidodValue = apellido.value.trim();
+    const emailValue = email.value.trim();
+
+    //AHORA VALIDAMOS
+    if(nombreValue === '') {
+		setErrorFor(nombre, 'Debe escribir su nombre.');
+	} else {
+		setSuccessFor(nombre);
+	}
+
+    if(apellidoValue === '') {
+		setErrorFor(apellido, 'Debe escribir su apellido.');
+	} else {
+		setSuccessFor(apellido);
+	}
+
+    if(emailValue === '') {
+		setErrorFor(email, 'No puede dejar el email en blanco');
+	} else if (!isEmail(emailValue)) {
+		setErrorFor(email, 'No ingreso un email válido');
+	} else {
+		setSuccessFor(email);
+	}
+}
+
+function setErrorFor(input, mensaje) {
+	const formControl = input.parentElement;
+	const small = formControl.querySelector('small');
+	formControl.className = 'form-control error';
+	small.innerText = mensaje;
+}
+
+function setSuccessFor(input) {
+	const formControl = input.parentElement;
+	formControl.className = 'form-control success';
+}
+
+function isEmail(email) {
+	return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+}
+
+const campos ={
+    nombre: false,
+    apellido: false,
+    correo: false
+}
+
+const validarFormulario = (e) => {
+    switch (e.target.name) {
+        case "Nombre":
+            validarCampo(expresiones.usuario, e.target, 'Nombre');
+        break;
+        
+        case "Apellido":
+            validarCampo(expresiones.contrasena, e.target, 'Apellido');
+        break;
+
+        case "Email":
+            validarCampo(expresiones.contrasena, e.target, 'Email');
+        break;
+    }
+}
+
+    
